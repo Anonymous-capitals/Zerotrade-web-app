@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const API = process.env.REACT_APP_API_BASE_URL || "https://zerodha-clone-web-app-backend.onrender.com";
 
 const getDashboardURL = () => {
-  const url = process.env.REACT_APP_DASHBOARD_URL || "";
+  const url = process.env.REACT_APP_DASHBOARD_URL;
   if (!url) {
     console.error("REACT_APP_DASHBOARD_URL is not set in .env file!");
     return null;
