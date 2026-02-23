@@ -2,7 +2,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
 const AuthContext = createContext();
-const API = process.env.REACT_APP_API_BASE_URL 
+const API = process.env.REACT_APP_API_BASE_URL
+const FRONTEND_URL = process.env.REACT_APP_FRONTEND_URL ;
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -18,8 +19,6 @@ export const AuthProvider = ({ children }) => {
           setLoading(false);
           return;
         }
-
-
 
         const response = await axios.get(`${API}/api/auth/verify`, {
           headers: {
@@ -37,13 +36,18 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
       }
     };
-
-    verifyAuth();
+    verifyAuth()
   }, []);
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    setIsAuthenticated(false);
+    window.location.href = FRONTEND_URL;
+  };
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
-      {!loading && children}
+    <AuthContext.Provider value={{ isAuthenticated, loading, logout }}>
+      {children}
     </AuthContext.Provider>
   );
 };
