@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
 const API = process.env.REACT_APP_API_BASE_URL  
-const FRONTEND_URL = process.env.REACT_APP_FRONTEND_URL || "https://zerotrade-web-app.vercel.app/";
+const FRONTEND_URL = process.env.REACT_APP_FRONTEND_URL ;
 
 const AuthContext = createContext();
 
